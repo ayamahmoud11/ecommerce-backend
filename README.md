@@ -15,7 +15,9 @@ Advanced e-commerce backend system with multi-tenant architecture and modern API
 - **⚡ Redis Cache** - High-performance caching  
 - **📦 Queue System** - Background job processing  
 - **✅ Pest Testing** - Full test coverage  
-- **📚 Swagger Docs** - Interactive API documentation
+- **📚 L5 Swagger Docs** - Interactive API documentation
+- **✅ CI/CD** - github/workflows/laravel.yml to run tests automatically.
+- **👥 Admin Dashboard** - Simple dashboard howing stats (product count, order count)..
 
 ## 📦 Installation
 
@@ -35,9 +37,9 @@ php artisan key:generate
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=your_db
-DB_USERNAME=your_user
-DB_PASSWORD=your_pass
+DB_DATABASE=ecommerce_backend
+DB_USERNAME=root
+DB_PASSWORD=
 
 # Run migrations & seeders
 php artisan migrate --seed
