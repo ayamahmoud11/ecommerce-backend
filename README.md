@@ -43,8 +43,7 @@ DB_PASSWORD=
 
 # Run migrations & seeders
 php artisan migrate --seed
-
-
+```
 ## 🧪 Running Tests
 
 # Install testing dependencies
@@ -59,7 +58,7 @@ php artisan test --parallel
 # Generate test coverage
 php artisan test --coverage-html coverage
 
-# 📚 API Documentation
+## 📚 API Documentation
 # Generate Swagger docs
 php artisan l5-swagger:generate
 
@@ -67,13 +66,13 @@ php artisan l5-swagger:generate
 http://localhost:8000/api/documentation
 ![Screenshot 2025-05-01 171354](https://github.com/user-attachments/assets/3e86d79c-0d10-4d4d-9b42-237b14ffba1e)
 
-#🚀 Deployment
+## 🚀 Deployment
 # Heroku setup
 heroku config:set APP_KEY=$(php artisan key:generate --show)
 heroku config:set DB_CONNECTION=pgsql
 heroku addons:create heroku-redis:hobby-dev
 
-#🛠 Tech Stack
+## 🛠 Tech Stack
 Framework: Laravel 10
 
 Database: MySQL/PostgreSQL
