@@ -45,7 +45,7 @@ DB_PASSWORD=
 php artisan migrate --seed
 
 
-# 🧪 Running Tests
+## 🧪 Running Tests
 
 # Install testing dependencies
 composer require --dev pestphp/pest
