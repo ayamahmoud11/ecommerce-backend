@@ -43,3 +43,49 @@ DB_PASSWORD=
 
 # Run migrations & seeders
 php artisan migrate --seed
+
+
+# 🧪 Running Tests
+
+# Install testing dependencies
+composer require --dev pestphp/pest
+
+# Run all tests
+php artisan test
+
+# Run parallel tests
+php artisan test --parallel
+
+# Generate test coverage
+php artisan test --coverage-html coverage
+
+# 📚 API Documentation
+# Generate Swagger docs
+php artisan l5-swagger:generate
+
+# Access API docs at:
+http://localhost:8000/api/documentation
+![Screenshot 2025-05-01 171354](https://github.com/user-attachments/assets/3e86d79c-0d10-4d4d-9b42-237b14ffba1e)
+
+#🚀 Deployment
+# Heroku setup
+heroku config:set APP_KEY=$(php artisan key:generate --show)
+heroku config:set DB_CONNECTION=pgsql
+heroku addons:create heroku-redis:hobby-dev
+
+#🛠 Tech Stack
+Framework: Laravel 10
+
+Database: MySQL/PostgreSQL
+
+Cache: Redis
+
+Auth: Laravel Sanctum
+
+Testing: Pest PHP
+
+Docs: Swagger OpenAPI
+
+CI/CD: GitHub Actions
+
+Admin Dashboard Vue.js
