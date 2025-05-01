@@ -50,7 +50,9 @@ php artisan migrate --seed
 composer require --dev pestphp/pest
 
 # Run all tests
-php artisan test
+php artisan 
+![Screenshot 2025-05-01 173134](https://github.com/user-attachments/assets/75ae8d6f-e94f-449a-89b4-d0a4b73b9a81)
+test
 
 # Run parallel tests
 php artisan test --parallel
