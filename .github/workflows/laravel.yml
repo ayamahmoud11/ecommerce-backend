@@ -1,0 +1,86 @@
+name: Laravel CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DB_CONNECTION: mysql
+  DB_HOST: mysql
+  DB_PORT: 3306
+  DB_DATABASE: ecommerce_test
+  DB_USERNAME: root
+  DB_PASSWORD: password
+  REDIS_HOST: redis
+  CACHE_DRIVER: redis
+  QUEUE_CONNECTION: redis
+  SESSION_DRIVER: redis
+
+jobs:
+  laravel-tests:
+    name: Run Laravel Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: ecommerce_test
+        ports:
+          - 3306:3306
+        options: 
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+          
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+        options:
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, dom, fileinfo, mysql, pdo_mysql, redis
+        ini-values: memory_limit=2G
+        coverage: none
+
+    - name: Install Composer dependencies
+      run: composer install --prefer-dist --no-interaction --no-progress
+
+    - name: Install NPM dependencies
+      run: |
+        npm ci
+        npm run prod
+
+    - name: Prepare environment
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+        
+    - name: Run database migrations
+      run: php artisan migrate:fresh --seed --env=testing
+
+    - name: Execute tests
+      run: php artisan test --parallel
+
+    - name: Upload code coverage
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: coverage
